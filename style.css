@@ -1,0 +1,366 @@
+/* CSS Variables cho chế độ sáng và tối */
+:root {
+    --background-color: #f0f2f5;
+    --main-text-color: #333;
+    --secondary-text-color: #555;
+    --card-background-color: #fff;
+    --card-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Tăng độ sâu bóng đổ */
+    --header-background-color: #ffffff;
+    --sidebar-background-color: #ffffff;
+    --toggle-background-color: #e0e0e0;
+    --toggle-circle-color: #888;
+    --filter-label-color: #444;
+    --filter-checkbox-border: #ccc;
+    --modal-overlay-color: rgba(0, 0, 0, 0.6); /* Tối hơn một chút */
+    --modal-background-color: #fff;
+    --link-color: #007bff; /* Màu liên kết */
+}
+
+/* Dark mode colors */
+body.dark-mode {
+    --background-color: #121212;
+    --main-text-color: #e0e0e0;
+    --secondary-text-color: #b0b0b0;
+    --card-background-color: #1e1e1e;
+    --card-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Bóng đổ mạnh hơn cho dark mode */
+    --header-background-color: #1a1a1a;
+    --sidebar-background-color: #1a1a1a;
+    --toggle-background-color: #444;
+    --toggle-circle-color: #e0e0e0;
+    --filter-label-color: #e0e0e0;
+    --filter-checkbox-border: #666;
+    --modal-overlay-color: rgba(0, 0, 0, 0.9);
+    --modal-background-color: #1e1e1e;
+    --link-color: #74b9ff;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background-color);
+    color: var(--main-text-color);
+    transition: background-color 0.4s ease, color 0.4s ease; /* Chuyển đổi mượt hơn */
+}
+
+/* App Layout */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--header-background-color);
+    box-shadow: var(--card-box-shadow);
+    border-bottom: 1px solid var(--toggle-background-color);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.header h1 a {
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+/* Toggle switch cho Light/Dark Mode */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--toggle-background-color);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--toggle-circle-color);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Main Content Grid Layout */
+.main-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    flex-grow: 1;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--sidebar-background-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--card-box-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sidebar h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--filter-label-color);
+    padding: 0.25rem 0; /* Thêm padding */
+    transition: color 0.2s ease;
+}
+
+.filter-group label:hover {
+    color: var(--link-color);
+}
+
+.filter-group input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+#search-input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--filter-checkbox-border);
+    background-color: var(--card-background-color);
+    color: var(--main-text-color);
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    outline: none;
+    border-color: #2196F3;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.main-content h2#no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--secondary-text-color);
+    margin-top: 2rem;
+}
+
+/* Movie Card */
+.movie-card {
+    background-color: var(--card-background-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px) scale(1.03); /* Phóng to và di chuyển lên nhiều hơn */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid var(--filter-checkbox-border);
+}
+
+.movie-info {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movie-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie-info p {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    margin-top: 0.5rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--modal-overlay-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--modal-background-color);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transform: scale(0.8); /* Bắt đầu nhỏ hơn */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Hiệu ứng đẹp hơn */
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--secondary-text-color);
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: var(--link-color);
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.modal-body .modal-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--card-box-shadow);
+}
+
+.modal-body .modal-info h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--main-text-color);
+}
+
+.modal-body .modal-info p {
+    margin-bottom: 0.5rem;
+    color: var(--secondary-text-color);
+}
+
+.modal-body .modal-info p strong {
+    color: var(--main-text-color);
+}
+
+@media (min-width: 600px) {
+    .modal-body {
+        grid-template-columns: 250px 1fr;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        padding: 1rem;
+        display: block;
+    }
+    
+    .main-content {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .header {
+        padding: 1rem 1.5rem;
+    }
+}
