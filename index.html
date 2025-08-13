@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Discovery App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Liên kết đến file CSS riêng -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header với nút chuyển đổi chế độ Sáng/Tối -->
+        <header class="header">
+            <h1><a href="#">Movie App</a></h1>
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </header>
+
+        <!-- Bố cục chính với Sidebar và Main Content -->
+        <main class="main-layout">
+            <!-- Sidebar: Thanh bên chứa bộ lọc và tìm kiếm -->
+            <aside class="sidebar">
+                <h2>Bộ lọc phim</h2>
+                
+                <div class="filter-group">
+                    <h3>Tìm kiếm theo tên</h3>
+                    <input type="text" id="search-input" placeholder="Nhập tên phim...">
+                </div>
+
+                <div class="filter-group">
+                    <h3>Thể loại</h3>
+                    <div id="genres-container">
+                        <!-- Checkbox thể loại sẽ được thêm tự động bằng JS -->
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Main Content: Khu vực hiển thị danh sách phim -->
+            <section class="main-content" id="movie-list">
+                <!-- Thêm các thẻ phim mẫu để xem trước giao diện -->
+                <div class="movie-card">
+                    <img src="https://play-lh.googleusercontent.com/buKf27Hxendp3tLNpNtP3E-amP0o4yYV-SGKyS2u-Y3GdGRTyfNCIT5WAVs2OudOz6so5K1jtYdAUKI9nw8" alt="Inception Poster">
+                    <div class="movie-info">
+                        <h3>Inception</h3>
+                        <p>Năm: 2010</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=The+Matrix+Poster" alt="The Matrix Poster">
+                    <div class="movie-info">
+                        <h3>The Matrix</h3>
+                        <p>Năm: 1999</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=Pulp+Fiction+Poster" alt="Pulp Fiction Poster">
+                    <div class="movie-info">
+                        <h3>Pulp Fiction</h3>
+                        <p>Năm: 1994</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=Forrest+Gump+Poster" alt="Forrest Gump Poster">
+                    <div class="movie-info">
+                        <h3>Forrest Gump</h3>
+                        <p>Năm: 1994</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=The+Lord+of+the+Rings+Poster" alt="The Lord of the Rings Poster">
+                    <div class="movie-info">
+                        <h3>The Lord of the Rings: The Fellowship of the Ring</h3>
+                        <p>Năm: 2001</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=Interstellar+Poster" alt="Interstellar Poster">
+                    <div class="movie-info">
+                        <h3>Interstellar</h3>
+                        <p>Năm: 2014</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=Parasite+Poster" alt="Parasite Poster">
+                    <div class="movie-info">
+                        <h3>Parasite</h3>
+                        <p>Năm: 2019</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=The+Dark+Knight+Poster" alt="The Dark Knight Poster">
+                    <div class="movie-info">
+                        <h3>The Dark Knight</h3>
+                        <p>Năm: 2008</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=1917+Poster" alt="1917 Poster">
+                    <div class="movie-info">
+                        <h3>1917</h3>
+                        <p>Năm: 2019</p>
+                    </div>
+                </div>
+                <div class="movie-card">
+                    <img src="https://placehold.co/500x750/000000/FFFFFF?text=Spider-Man+Poster" alt="Spider-Man Poster">
+                    <div class="movie-info">
+                        <h3>Spider-Man: Into the Spider-Verse</h3>
+                        <p>Năm: 2018</p>
+                    </div>
+                </div>
+                <!-- Các thẻ phim sẽ được tạo tự động bằng JS -->
+                <h2 id="no-results" style="display: none;">Không tìm thấy phim nào.</h2>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal chi tiết phim -->
+    <div class="modal-overlay" id="movie-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div class="modal-body">
+                <!-- Nội dung chi tiết phim sẽ được tạo bằng JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Liên kết đến file JavaScript riêng -->
+    <script src="js/java.js"></script>
+</body>
+</html>
